@@ -1,10 +1,26 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Layout from '../components/Layout';
 import { useFormik } from 'formik';
-import * as Yup from 'yup';
-const Registro = () => {
-	// Validación del formulario
+import { useMutation, gql } from '@apollo/client';
+import { useRouter } from 'next/router';
 
+const REGISTRO_USUARIO = gql`
+	mutation crearUsuario($input: UsuarioInput) {
+		crearUsuario(input: $input) {
+			id
+			email
+			nombre
+			apellido
+		}
+	}
+`;
+
+const Registro = () => {
+	const [ crearUsuario ] = useMutation(REGISTRO_USUARIO);
+	const [ msg, saveMessage ] = useState(null);
+	const [ color, changeColor ] = useState('');
+	const router = useRouter();
+	// Validación del formulario
 	const formik = useFormik({
 		initialValues: {
 			nombre: '',
@@ -12,16 +28,51 @@ const Registro = () => {
 			email: '',
 			password: ''
 		},
-		onSubmit: (values) => {
-			console.log('sending');
-			console.log(values);
+		onSubmit: async (values) => {
+			const { nombre, apellido, email, password } = values;
+			try {
+				const { data } = await crearUsuario({
+					variables: {
+						input: {
+							nombre,
+							apellido,
+							email,
+							password
+						}
+					}
+				});
+				formik.resetForm();
+				changeColor('green');
+				saveMessage(`Usuario "${data.crearUsuario.email}" creado exitosamente.`);
+				setTimeout(() => {
+					saveMessage(null);
+					router.push('/');
+				}, 3000);
+			} catch (error) {
+				changeColor('red');
+				saveMessage(error.message.replace('GraphQL error:', ''));
+				setTimeout(() => {
+					saveMessage(null);
+				}, 5000);
+			}
 		}
 	});
+
+	const showMessage = () => {
+		return (
+			<div
+				className={`bg-${color}-600 text-white py-2 px-3 my-3 w-full max-w-sm text-center mx-auto font-bold rounded`}
+			>
+				<p>{msg}</p>
+			</div>
+		);
+	};
 
 	return (
 		<div>
 			<Layout>
 				<h1 className="text-center text-2xl text-white">Registro</h1>
+				{msg && showMessage()}
 				<div className="flex justify-center mt-5">
 					<div className="w-full max-w-sm">
 						<form className="bg-white rounded shadow-md px-8 pt-6 pb-8 mb-4" onSubmit={formik.handleSubmit}>
@@ -79,6 +130,7 @@ const Registro = () => {
 									id="password"
 									type="password"
 									placeholder="Ingrese contraseña..."
+									minLength={6}
 								/>
 							</div>
 							<input
