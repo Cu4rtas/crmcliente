@@ -58,7 +58,7 @@ const Login = () => {
 			<div
 				className={`bg-${color}-600 text-white py-2 px-3 my-3 w-full max-w-sm text-center mx-auto font-bold rounded`}
 			>
-				<p>{msg}</p>
+				{color === 'red' ? <p>&times; {msg}</p> : <p>{msg}</p>}
 			</div>
 		);
 	};
