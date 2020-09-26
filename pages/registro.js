@@ -76,7 +76,7 @@ const Registro = () => {
 				<div className="flex justify-center mt-5">
 					<div className="w-full max-w-sm">
 						<form className="bg-white rounded shadow-md px-8 pt-6 pb-8 mb-4" onSubmit={formik.handleSubmit}>
-							<div className="mb-4">
+							<div>
 								<label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="nombre">
 									Nombre
 								</label>
@@ -90,7 +90,7 @@ const Registro = () => {
 									placeholder="Ingrese nombre..."
 								/>
 							</div>
-							<div className="mb-4">
+							<div>
 								<label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="apellido">
 									Apellido
 								</label>
@@ -104,7 +104,7 @@ const Registro = () => {
 									placeholder="Ingrese apellido..."
 								/>
 							</div>
-							<div className="mb-4">
+							<div>
 								<label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="email">
 									Email
 								</label>
@@ -118,7 +118,7 @@ const Registro = () => {
 									placeholder="Ingrese email..."
 								/>
 							</div>
-							<div className="mb-4">
+							<div>
 								<label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="password">
 									Contraseña
 								</label>

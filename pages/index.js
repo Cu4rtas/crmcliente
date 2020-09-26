@@ -2,6 +2,7 @@ import Layout from '../components/Layout';
 import { gql, useQuery } from '@apollo/client';
 import React from 'react';
 import { useRouter } from 'next/router';
+import Link from 'next/link';
 const OBTENER_CLIENTES_USUARIO = gql`
 	query obtenerClientesVendedor {
 		obtenerClientesVendedor {
@@ -10,7 +11,7 @@ const OBTENER_CLIENTES_USUARIO = gql`
 			apellido
 			ciudad
 			email
-			movil
+			telefono
 			direccion
 		}
 	}
@@ -18,25 +19,28 @@ const OBTENER_CLIENTES_USUARIO = gql`
 
 const Index = () => {
 	const router = useRouter();
-
 	const { data, loading, client } = useQuery(OBTENER_CLIENTES_USUARIO);
 
-	//TODO: Arreglar estado 'Cargando...'
 	if (loading) {
-		return 'Cargando...';
+		return <p>Loading...</p>;
 	}
 
 	if (!data.obtenerClientesVendedor) {
 		client.clearStore();
 		router.push('/login');
-		return null;
+		return <p>Loading...</p>;
 	}
 
 	return (
 		<Layout>
-			<h1 className="text-2xl text-gray-800 font-light ml-5 mb-2">Clientes</h1>
-
-			<div className="flex flex-col">
+			<h1>Clientes</h1>
+			<Link href="/registrocliente">
+				<a className="bg-blue-500 hover:bg-blue-400 text-white font-bold py-2 px-4 border-b-4 border-blue-700 hover:border-blue-500 rounded">
+					REGISTRAR CLIENTE
+				</a>
+			</Link>
+			<hr className="border bg-black  mt-6" />
+			<div className="flex flex-col mt-4">
 				<div className="-my-2 overflow-x-auto sm:-mx-4 lg:-mx-4">
 					<div className="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8">
 						<div className="shadow overflow-hidden border-b border-gray-200 sm:rounded-lg">

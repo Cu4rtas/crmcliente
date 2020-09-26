@@ -70,7 +70,7 @@ const Login = () => {
 			<div className="flex justify-center mt-5">
 				<div className="w-full max-w-sm">
 					<form className="bg-white rounded shadow-md px-8 pt-6 pb-8 mb-4" onSubmit={formik.handleSubmit}>
-						<div className="mb-4">
+						<div>
 							<label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="email">
 								Email
 							</label>
@@ -84,7 +84,7 @@ const Login = () => {
 								placeholder="Ingrese email..."
 							/>
 						</div>
-						<div className="mb-4">
+						<div>
 							<label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="password">
 								Contraseña
 							</label>
@@ -100,7 +100,7 @@ const Login = () => {
 						</div>
 						<input
 							type="submit"
-							className="bg-gray-800 w-full mt-5 p-2 text-white uppercase hover:bg-gray-900 rounded"
+							className="bg-gray-800 w-full mt-5 p-2 text-white uppercase hover:bg-gray-900 cursor-pointer rounded"
 							value="Iniciar Sesión"
 						/>
 					</form>
