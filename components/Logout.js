@@ -29,8 +29,14 @@ const Logout = () => {
 
 	return (
 		<div className="flex items-center bg-gray-600 p-2 shadow-xl">
-			<div className="flex-shrink-0 h-10 w-10">
-				<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+			<div className="flex-shrink-0">
+				<svg
+					xmlns="http://www.w3.org/2000/svg"
+					fill="none"
+					viewBox="0 0 24 24"
+					stroke="currentColor"
+					className="h-12 w-12"
+				>
 					<path
 						strokeLinecap="round"
 						strokeLinejoin="round"
